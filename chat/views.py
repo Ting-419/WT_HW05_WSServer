@@ -33,5 +33,5 @@ def webhook(request):
 
 
 def users_online(request):
-    connected_users = [user.first_name for user in ConnectedUsers.objects.all()]
+    connected_users = [str(user) for user in ConnectedUsers.objects.all()]
     return HttpResponse("Currently connected: %s" % connected_users)

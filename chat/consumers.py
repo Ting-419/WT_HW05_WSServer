@@ -16,7 +16,8 @@ class ChatConsumer(WebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
-        username = "Anonymous" if self.scope['user'].username == "" else self.scope['user'].username
+        username = "Anonymous - %s:%d" % (self.scope['client'][0], self.scope['client'][1]) \
+            if self.scope['user'].username == "" else self.scope['user'].username
         ConnectedUsers.objects.create(first_name=username)
         self.username = username
         self.accept()

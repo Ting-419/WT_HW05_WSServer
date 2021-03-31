@@ -6,4 +6,4 @@ class ConnectedUsers(models.Model):
     connected = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return self.first_name
+        return "%s connected at %s" % (self.first_name, self.connected)
