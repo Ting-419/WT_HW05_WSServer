@@ -25,4 +25,4 @@ def webhook(request):
             'message': 'Hello from the Web. Current time is %s' % datetime.datetime.now()
         }
     )
-    return HttpResponse("Result is OK. Check Chat windows for a new message")
+    return HttpResponse("Result is OK. Check windows of the firstly created chat for a new message")
