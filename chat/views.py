@@ -1,8 +1,12 @@
+import datetime
+
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
-from django.shortcuts import render
 from django.http import HttpResponse
-import datetime
+from django.shortcuts import render
+
+from chat.models import ConnectedUsers
+
 
 def index(request):
     return render(request, 'chat/index.html')
@@ -26,3 +30,8 @@ def webhook(request):
         }
     )
     return HttpResponse("Result is OK. Check windows of the firstly created chat for a new message")
+
+
+def users_online(request):
+    connected_users = [user.first_name for user in ConnectedUsers.objects.all()]
+    return HttpResponse("Currently connected: %s" % connected_users)
