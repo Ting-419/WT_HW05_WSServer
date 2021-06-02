@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from chat.models import ConnectedUsers
-
+from channelsWS.cls.state import State
 
 def index(request):
     return render(request, 'chat/index.html')
@@ -26,7 +26,8 @@ def webhook(request):
         list(channel_layer.groups.keys())[0],
         {
             'type': 'chat_message',
-            'message': 'Hello from the Web. Current time is %s' % datetime.datetime.now()
+            'message': 'Hello from the Web. Current time is %s. Time list %s' %
+                       (datetime.datetime.now(), State().times)
         }
     )
     return HttpResponse("Result is OK. Check windows of the firstly created chat for a new message")
