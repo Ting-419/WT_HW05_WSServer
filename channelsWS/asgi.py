@@ -14,7 +14,7 @@ from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.core.asgi import get_asgi_application
 import chat.routing
-
+from chat.models import ConnectedUsers
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'channelsWS.settings')
 
 application = ProtocolTypeRouter({
@@ -25,3 +25,6 @@ application = ProtocolTypeRouter({
         )
     ),
 })
+
+
+ConnectedUsers.objects.all().delete()

@@ -20,3 +20,6 @@ class State(metaclass=SingletonMeta):
 
     def add_to_times(self):
         self.times.append(datetime.datetime.now())
+
+    def get_times(self):
+        return [datetime.datetime.strftime(the_time, "%d-%b-%Y-%H:%M:%S") for the_time in self.times]

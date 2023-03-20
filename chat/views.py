@@ -27,10 +27,10 @@ def webhook(request):
         {
             'type': 'chat_message',
             'message': 'Hello from the Web. Current time is %s. Time list %s' %
-                       (datetime.datetime.now(), State().times)
+                       (datetime.datetime.now(), State().get_times())
         }
     )
-    return HttpResponse("Result is OK. Check windows of the firstly created chat for a new message")
+    return HttpResponse("Result is OK. Check the active windows for a new message")
 
 
 def users_online(request):
