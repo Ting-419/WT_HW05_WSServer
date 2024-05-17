@@ -4,24 +4,35 @@
 <head>
     <meta charset="utf-8"/>
     <title>Chat Rooms</title>
+    <script>
+        let ws = null;
+            function connect() {
+                ws = new WebSocket('ws://localhost:8000/ws/chat/a1/')
+                ws.onopen = ()=> {alert('connected')}
+                ws.onclose = ()=> {alert('closed')}
+                ws.onmessage = (e)=> {alert('Message received: ' + e.data)}
+                ws.onerror = (e)=> {alert('Error happened: ' + e)}
+            }
+            function disconnect(){
+                ws.close();
+            }
+            function sendCurrentTime(){
+            // send data to the WebSocket Server
+                ws.send(new Date())
+            }
+            function sendValue(){
+                inputValue = document.getElementById('evalue')
+                interValue = inputValue.value
+                ws.send(interValue)
+            }
+    </script>
 </head>
 <body>
-    What chat room would you like to enter?<br>
-    <input id="room-name-input" type="text" size="100"><br>
-    <input id="room-name-submit" type="button" value="Enter">
-
-    <script>
-        document.querySelector('#room-name-input').focus();
-        document.querySelector('#room-name-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#room-name-submit').click();
-            }
-        };
-
-        document.querySelector('#room-name-submit').onclick = function(e) {
-            var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = '/chat/' + roomName + '/';
-        };
-    </script>
+<button onclick="connect()">Connect to Websocket server</button>
+<button onclick="disconnect()">Disconnect from Websocket server</button>
+<button onclick="sendCurrentTime()">Send current time</button><br>
+<label for="evalue" > Enter value: </label>
+<input type="number" id="evalue" name="evalue">
+<button onclick="sendValue()">Send the value to the WebSocket Server</button>
 </body>
 </html>

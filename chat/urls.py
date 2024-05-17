@@ -2,10 +2,8 @@
 from django.urls import path
 
 from . import views
+from .views import index
 
 urlpatterns = [
-    path('webhook/', views.webhook),
-    path('online/', views.users_online),
-    path('', views.index, name='index'),
-    path('<str:room_name>/', views.room, name='room'),
+    path('', index),
 ]
